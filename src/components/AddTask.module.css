@@ -1,0 +1,9 @@
+.reset{
+    margin:5px;
+    padding:3px;
+    background-color: aquamarine;
+    border-radius: 5px;
+    font-weight: 15px;
+    cursor: pointer;
+}
+

@@ -1,24 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+//import Count from './components/Count';
+import TaskList from './components/TaskList';
+import AddTask from './components/AddTask';
+import Header from './components/Header';
+
+
 
 function App() {
+  const [tasks, setTasks] = useState([
+    // { id: 543, name: "Record React Lectures", completed: true },
+    // { id: 544, name: "Edit React Lectures", completed: false },
+    // { id: 545, name: "Watch React Lectures", completed: true }
+  ]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <main>
+        <AddTask tasks={tasks} setTasks={setTasks}/>
+        <TaskList tasks={tasks} setTasks={setTasks}/>
+      </main>
+      </>
   );
 }
 

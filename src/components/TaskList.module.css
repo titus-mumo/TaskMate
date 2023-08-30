@@ -1,0 +1,24 @@
+.title{
+    margin:2%;
+}
+.button{
+    background-color:rgb(113, 224, 224);
+    display:flex;
+    justify-content: center;
+    padding:2px;
+    color:black;
+    box-shadow: 0.5px 1px rgb(167, 215, 215);
+}
+
+.header{
+    display:flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    box-shadow: 0.5px 1px grey;
+    border: 1px solid black;
+}
+.section{
+    height: 70vh;
+    max-width:600px;
+    z-index: 0;
+}
