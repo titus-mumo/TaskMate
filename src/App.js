@@ -6,7 +6,6 @@ import AddTask from './components/AddTask';
 import Header from './components/Header';
 
 
-
 function App() {
   const [tasks, setTasks] = useState([
     // { id: 543, name: "Record React Lectures", completed: true },
@@ -18,7 +17,7 @@ function App() {
       <Header />
       <main>
         <AddTask tasks={tasks} setTasks={setTasks}/>
-        <TaskList tasks={tasks} setTasks={setTasks}/>
+        <TaskList tasks={tasks} setTasks={setTasks} />
       </main>
       </>
   );
