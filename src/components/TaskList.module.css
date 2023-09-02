@@ -16,6 +16,8 @@
     border-radius: 4px;
     box-shadow: 0.5px 1px grey;
     border: 1px solid black;
+    width:100%;
+    align-items: center;
 }
 .section{
     height: 70vh;

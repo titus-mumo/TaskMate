@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import styles from './TaskList.module.css';
 
-function TaskList({ tasks, setTasks }) {
+function TaskList({ tasks, setTasks, update, setUpdate, updateString, setUpdateString, change, setChange }) {
     const [show, setShow] = useState(true);
-    const [url, setUrl] = useState("http://localhost:8000/tasks")
+    const [url, setUrl] = useState("http://localhost:3000/tasks")
     const [loading, setLoading] = useState(false)
 
     function handleDelete(id) {
+        setUpdate(false)
+        setUpdateString(null)
         setTasks(tasks.filter(task => id !== task.id));
     };
 
@@ -26,6 +28,13 @@ function TaskList({ tasks, setTasks }) {
         }
     }, [url, setTasks])
 
+    const handleUpdate = (id) => {
+        setUpdate(true)
+        const taskToUpdate = tasks.find(task => id === task.id);
+        setChange(taskToUpdate.name)
+        setUpdateString(taskToUpdate)
+    }
+
     // useEffect(() => {
     //     fetch(url)
     //     .then(response => response.json())
@@ -37,14 +46,15 @@ function TaskList({ tasks, setTasks }) {
     //useCallback
     useEffect(() => {
         fetchTasks();
-        console.log("-")
+        //console.log("-")
     }, [fetchTasks]);
     return (
         <section className={styles.section}>
-            <button className="btn btn-primary" onClick={() => setUrl("http://localhost:8000/tasks")}>All</button>
-            <button className="btn btn-primary" onClick={() => setUrl("http://localhost:8000/tasks?completed=true")}>Completed</button>
-            <button className="btn btn-primary" onClick={() => setUrl("http://localhost:8000/tasks?completed=false")}>Incomplete</button>
+            <button className="btn btn-primary" onClick={() => setUrl("http://localhost:3000/tasks")}>All</button>
+            <button className="btn btn-primary" onClick={() => setUrl("http://localhost:3000/tasks?completed=true")}>Completed</button>
+            <button className="btn btn-primary" onClick={() => setUrl("http://localhost:3000/tasks?completed=false")}>Incomplete</button>
             <div className={styles.header}>
+                <p style={loading ? {}:{opacity:'0.8', display:'flex', alignContent:'center', height:'100%'}}>{ loading? '':tasks.length}</p>
                 <h1 className={styles.title} >Task List</h1>
                 <button onClick={handleShow} type='button' className="btn btn-primary">{ show? 'Hide':'Show'}</button>
             </div>
@@ -52,9 +62,10 @@ function TaskList({ tasks, setTasks }) {
             <ul>
                 { show && tasks.map((task) => (
                     <li key={task.id} className={task.completed? 'completed': 'incompleted'}>
-                        <span className="span">
-                            {task.id} - {task.name}
+                        <span className="span" style={{width:'60%'}}>
+                            {task.id} - {updateString && updateString.id === task.id? change:task.name}
                         </span>
+                        <button onClick = { () => handleUpdate(task.id)} type='submit' className="btn btn-dark">Edit</button>
                         <button onClick={() => handleDelete(task.id)} type="button" className="btn btn-danger">Delete</button>
                     </li>
                 ))}
