@@ -58,7 +58,6 @@ function TaskList({ tasks, setTasks, update, setUpdate, updateString, setUpdateS
                 <h1 className={styles.title} >Task List</h1>
                 <button onClick={handleShow} type='button' className="btn btn-primary">{ show? 'Hide':'Show'}</button>
             </div>
-            {loading && <p>Add a task... </p>}
             <ul>
                 { show && tasks.map((task) => (
                     <li key={task.id} className={task.completed? 'completed': 'incompleted'}>
